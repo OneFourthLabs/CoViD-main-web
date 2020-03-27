@@ -29,6 +29,7 @@
 	<script>
 		$(function(){
 			$("#nav_sidebar").load("nav.html");
+			await new Promise(r => setTimeout(r, 1000));
 			var a_chatbot = document.getElementById("a_chatbot");
 			a_chatbot.onclick = load_chatbot;
 			function load_chatbot() {
