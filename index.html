@@ -27,17 +27,22 @@
 	<script src="js/main.js"></script>
 
 	<script>
+
 		$(function(){
 			$("#nav_sidebar").load("nav.html");
-			await new Promise(r => setTimeout(r, 1000));
-			var a_chatbot = document.getElementById("a_chatbot");
-			a_chatbot.onclick = load_chatbot;
+
 			function load_chatbot() {
 				$("#content").replaceWith("<iframe allow=\"geolocation *;microphone *\" src=\"https://corona-bot.onefourthlabs.com/\" style=\"margin:0; padding:0rem; width:inherit; height:100%; border:none; margin:0; padding:0; overflow:hidden;\"></iframe>")
 				return false;
 			}
-		});
+
+			setInterval(function(){
+				var a_chatbot = document.getElementById("a_chatbot");
+				a_chatbot.onclick = load_chatbot;
+			},1000);
+
+		};
 		
-	</script>
-</body>
-</html>
+		</script>
+	</body>
+	</html>
