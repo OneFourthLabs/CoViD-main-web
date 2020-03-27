@@ -29,17 +29,15 @@
 
 	<script>
 		$(function(){
-		  $("#nav_sidebar").load("nav.html");
+			$("#nav_sidebar").load("nav.html");
+			var a_chatbot = document.getElementById("a_chatbot");
+			a_chatbot.onclick = load_chatbot;
+			function load_chatbot() {
+				$("#content").replaceWith("<iframe allow=\"geolocation *;microphone *\" src=\"https://corona-bot.onefourthlabs.com/\" style=\"margin:0; padding:0rem; width:inherit; height:100%; border:none; margin:0; padding:0; overflow:hidden;\"></iframe>")
+				return false;
+			}
 		});
-	</script>
-
-	<script>
-		var a_chatbot = document.getElementById("a_chatbot");
-		a_chatbot.onclick = load_chatbot;
-		function load_chatbot() {
-		  $("#content").replaceWith("<iframe allow=\"geolocation *;microphone *\" src=\"https://corona-bot.onefourthlabs.com/\" style=\"margin:0; padding:0rem; width:inherit; height:100%; border:none; margin:0; padding:0; overflow:hidden;\"></iframe>")
-		  return false;
-		}
+		
 	</script>
 </body>
 </html>
