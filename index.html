@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -13,58 +13,126 @@
 <body>
 	<div class="wrapper d-flex align-items-stretch">
 		<div id="nav_sidebar">
+			<nav id="sidebar" style="min-height: 100vh">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+						<i class="fa fa-bars"></i>
+						<span class="sr-only">Toggle Menu</span>
+					</button>
+				</div>
+				<div class="p-4 pt-5">
+					<h1><a href="index.html" class="logo">AI4Bharat<br/>COVID·19</a></h1>
+					<ul class="list-unstyled components mb-5">
+						<li class="active">
+							<a href="index.html">Home</a>
+						</li>
+						<li>
+							<a href="chatbot.html" id="a_chatbot">Chatbot</a>
+						</li>
+						<li>
+							<a href="#statsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Statistics</a>
+							<ul class="collapse list-unstyled" id="statsSubmenu">
+								<li>
+									<a href="#" id="a_patient_tracker">Patient Tracker</a>
+								</li>
+								<li>
+									<a href="#" id="a_state_wise_stats">State-wise Statistics</a>
+								</li>
+								<li>
+									<a href="#" id="a_state_wise_map">State-wise Maps</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#helpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Help/Volunteer</a>
+							<ul class="collapse list-unstyled" id="helpSubmenu">
+								<li>
+									<a href="#" id="a_sos_map">SOS Map</a>
+								</li>
+								<li>
+									<a href="#" id="a_volunteer_map">Volunteer Map</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#infoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Info</a>
+							<ul class="collapse list-unstyled" id="infoSubmenu">
+								<li>
+									<a href="#">Government Advisory</a>
+								</li>
+								<li>
+									<a href="#">COVID Hospitals</a>
+								</li>
+								<li>
+									<a href="#">Do's and Dont's</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">About</a>
+						</li>
+					</ul>
+
+
+
+					<div class="footer">
+						<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							<!-- Copyright &copy;<script>document.write(new Date().getFullYear());</script>  -->
+							This website is created by One Fourth Labs, an IIT Madras incubated startup.
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+						</div>
+
+					</div>
+				</nav>
+			</div>
+
+			<!-- Page Content  -->
+			<div id="content" class="p-4 p-md-5 pt-5" style="padding:3rem !important" >
+			</div>
 		</div>
 
-		<!-- Page Content  -->
-		<div id="content" class="p-4 p-md-5 pt-5" style="padding:3rem !important" >
-		</div>
-	</div>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script src="js/main.js"></script>
 
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	<script src="js/main.js"></script>
+		<script>
 
-	<script>
+			$(function(){
+				// $("#nav_sidebar").load("nav.html");
 
-		$(function(){
-			$("#nav_sidebar").load("nav.html");
+				function load_chatbot() {
+					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important\" ><iframe allow=\"geolocation *;microphone *\" src=\"https://corona-bot.onefourthlabs.com/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
+					return false;
+				}
 
-			function load_chatbot() {
-				$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important\" ><iframe allow=\"geolocation *;microphone *\" src=\"https://corona-bot.onefourthlabs.com/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-				return false;
-			}
+				function load_patient_tracker() {
+					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding-left:2rem !important; padding-top:2rem !important\" ><iframe src=\"https://datawrapper.dwcdn.net/yJfWb/12/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
+					return false;
+				}
 
-			function load_patient_tracker() {
-				$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding-left:2rem !important; padding-top:2rem !important\" ><iframe src=\"https://datawrapper.dwcdn.net/yJfWb/12/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-				return false;
-			}
+				function load_state_wise_stats() {
+					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding-left:2rem !important; padding-top:2rem !important\" ><iframe src=\"https://datawrapper.dwcdn.net/yJfWb/12/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
+					return false;
+				}
 
-			function load_state_wise_stats() {
-				$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding-left:2rem !important; padding-top:2rem !important\" ><iframe src=\"https://datawrapper.dwcdn.net/yJfWb/12/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-				return false;
-			}
+				function load_state_wise_map() {
+					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding-left:2rem !important; padding-top:2rem !important\" ><iframe src=\"https://datawrapper.dwcdn.net/FMHmt/5/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
+					return false;
+				}
 
-			function load_state_wise_map() {
-				$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding-left:2rem !important; padding-top:2rem !important\" ><iframe src=\"https://datawrapper.dwcdn.net/FMHmt/5/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-				return false;
-			}
+				function load_sos_map() {
+					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important\" ><iframe src=\"https://datawrapper.dwcdn.net/FMHmt/5/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
+					return false;
+				}
 
-			function load_sos_map() {
-				$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important\" ><iframe src=\"https://datawrapper.dwcdn.net/FMHmt/5/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-				return false;
-			}
+				function load_volunteer_map() {
+					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important\" ><iframe src=\"https://onefourthlabs.github.io/CoViD19-Help-Tracker/map_of_volunteers.html\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
+					return false;
+				}
 
-			function load_volunteer_map() {
-				$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important\" ><iframe src=\"https://onefourthlabs.github.io/CoViD19-Help-Tracker/map_of_volunteers.html\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-				return false;
-			}
 
-			https://onefourthlabs.github.io/CoViD19-Help-Tracker/map_of_volunteers.html
-			https://onefourthlabs.github.io/CoViD19-Help-Tracker/map_of_volunteers.html
-
-			setInterval(function(){
 				var a_chatbot = document.getElementById("a_chatbot");
 				a_chatbot.onclick = load_chatbot;
 
@@ -82,10 +150,10 @@
 
 				var a_volunteer_map = document.getElementById("a_volunteer_map");
 				a_volunteer_map.onclick = load_volunteer_map;
-			},500);
 
-		});
-		
+
+			});
+
 		</script>
 	</body>
 	</html>
