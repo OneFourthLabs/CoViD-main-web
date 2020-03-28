@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+	<!-- https://codepen.io/saransh/pen/BKJun -->
+	<!-- https://codepen.io/dazulu/pen/fGFyj -->
+	<!-- https://codepen.io/sedlukha/pen/eRoYMZ -->
+	<!-- https://codepen.io/AdamBlum/pen/jbBcf -->
+
+
+	<title>AI4Bharat COVID19 App</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+	<style type="text/css">
+
+		body{
+			margin:0px;
+		  	/* Never get smaller than this */
+		  	font-size: 20px;
+		}
+
+		@media (min-width:600px) {
+		  body {
+		    font-size: 22px;
+		  }
+		}
+
+		@media (min-width:800px) {
+		  body {
+		    font-size: 24px;
+		  }
+		}
+
+		@media (min-width:1000px) {
+		  body {
+		    font-size: 26px;
+		  }
+		}
+
+		@media (min-width:1200px) {
+		  body {
+		    /* Never get larger than this */
+		    font-size: 28px;
+		  }
+		}
+
+		.features {
+			font-family: 'Rubik', serif;
+			font-size: smaller;
+			font-style: italic;
+			font-weight:300;
+			color: rgba(255, 255, 255, 0.5);
+			visibility:hidden;
+		}
+
+		.features-list {
+			font-family: 'Rubik', serif;
+			padding-top: -5px;
+			font-size: smaller;
+			font-weight:300;
+			color: rgba(255, 255, 255, 0.8);
+			visibility: hidden;
+			display:block;
+			margin: -0.2rem;
+		}
+
+
+		.main-content {
+			overflow:hidden;
+			position: relative;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-flow: column;
+
+			min-height: 100vh;
+
+			/*background: linear-gradient(to right, rgba(36,31,31,1) 0%, rgba(36,31,31,1) 32%, rgba(74,71,70,1) 100%);*/
+			/*background: linear-gradient(to right, rgba(35,38,81,1) 0%, rgba(41,51,99,1) 32%, rgba(35,38,81,1) 100%);*/
+			background: #052c6b;
+			color: #fff;
+			text-align: center;
+		}
+
+		.vignette{
+			position:absolute;
+			width:100%; height:100%;
+			box-shadow:inset 0px 0px 150px 20px black;
+			mix-blend-mode: multiply;
+			-webkit-animation: vignette-anim 3s infinite; /* Safari 4+ */
+			-moz-animation:    vignette-anim 3s infinite; /* Fx 5+ */
+			-o-animation:      vignette-anim 3s infinite; /* Opera 12+ */
+			animation:         vignette-anim 3s infinite; /* IE 10+, Fx 29+ */
+		}
+
+		.noise {
+			z-index: 100;
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			width: 100%;
+			height: 100%;
+
+			pointer-events: none;
+			opacity: .15;
+		}
+
+		.line{
+			position:absolute;
+			height:100%; width:1px;
+			opacity:0.1;
+			background-color:#000;
+		}
+
+		.titleCont{position:relative;}
+
+		.main-title {
+			padding: .3em 1em .25em;    
+			/*font-size: 24px;*/
+			font-size: smaller;
+			color: white;
+			/*font-family: 'Roboto Slab', sans-serif;*/
+			font-family: 'Rubik', serif;
+			font-weight: 500;
+			position:relative;
+			line-height:1.3;
+			color: rgba(255, 255, 255, 0.5);
+			white-spacing:
+		}
+
+		.sub-title {
+			padding: .3em 1em .25em;    
+			font-weight: 300;
+			/*font-size: 32px;*/
+			color: white;
+			font-family: 'Rubik', serif;
+			position:relative;
+			line-height:0.8;
+			visibility: hidden;
+			white-spacing:
+		}
+
+		.overTitle{
+			position:absolute;
+			top:0;
+			left:0;
+		}
+
+		.dot{
+			width:3px;
+			height:2px;
+			background-color:white;
+			position:absolute;
+			opacity:0.3;
+		}
+
+
+		@-webkit-keyframes vignette-anim {
+			0%   , 100%{ opacity: 1; }
+			50% { opacity: 0.7; }
+		}
+		@-moz-keyframes vignette-anim {
+			0%   , 100%{ opacity: 1; }
+			50% { opacity: 0.7; }
+		}
+		@-o-keyframes vignette-anim {
+			0%   , 100%{ opacity: 1; }
+			50% { opacity: 0.7; }
+		}
+		@keyframes vignette-anim {
+			0%   , 100%{ opacity: 1; }
+			50% { opacity: 0.7; }
+		}
+
+
+	/*/**/*/
+
+	</style>
+
+
+</head>
+
+<body>
+
+	<main role="main" class="main-content" id="main-content">
+		<div class="titleCont">
+			<h2 class="main-title" id="main-title">
+				"Om, may all be happy,<br/>
+				may all be free from illness.<br/>
+				May all see what is auspicious,<br/>
+				may no one suffer.<br/>
+				Om <u>peace</u>, <u>peace</u>, <u>peace</u>.
+			</h2>
+
+			<h1 class="sub-title" id="sub-title">
+				<br/>AI4Bharat<br/><span style="font-size: 50%; letter-spacing:5px; font-weight:500; color:rgba(255, 255, 255, 0.8)">COVID19 APP</span>
+			</h1>
+
+			<h3 class="features" id="features">
+				<br/>Click on the menu above to
+			</h3>
+			<h3 class="features-list features-list-1" id="features-list-1">
+				chat with our bot
+			</h3>
+			<h3 class="features-list features-list-2" id="features-list-2">
+				visualise live data
+			</h3>
+			<h3 class="features-list features-list-3" id="features-list-3">
+				seek and offer help
+			</h3>
+			<h3 class="features-list features-list-4" id="features-list-4">
+				follow govt. updates
+			</h3>
+		</div>
+		<canvas id="noise" class="noise"></canvas>
+		<div class="vignette"></div>
+
+	</main>
+
+	<script src="test.js"></script>
+
+	<script type="text/javascript">
+
+		function animateCSS(element, animationName, speed, callback) {
+			const node = document.querySelector(element)
+			node.classList.add('animated', animationName, speed)
+
+			function handleAnimationEnd() {
+				node.classList.remove('animated', animationName, speed)
+				node.removeEventListener('animationend', handleAnimationEnd)
+
+				if (typeof callback === 'function') callback()
+			}
+
+			node.addEventListener('animationend', handleAnimationEnd)
+		}
+
+		animateCSS('.main-title', 'fadeIn', 'slow', function() {
+			document.getElementById("sub-title").style.visibility = "visible"
+  			animateCSS('.sub-title', 'fadeIn', 'slow', function() {
+  				setInterval(function(){
+					document.getElementById("features").style.visibility = "visible"
+					document.getElementById("features-list-1").style.visibility = "visible"
+					animateCSS('.features-list-1', 'fadeIn', 'fast', function() {
+						document.getElementById("features-list-2").style.visibility = "visible"
+						animateCSS('.features-list-2', 'fadeIn', 'fast', function() {
+							document.getElementById("features-list-3").style.visibility = "visible"
+							animateCSS('.features-list-3', 'fadeIn', 'fast', function() {
+								document.getElementById("features-list-4").style.visibility = "visible"
+								animateCSS('.features-list-4', 'fadeIn', 'fast', function(){
+									setTimeout(function(){
+										document.getElementById("features").style.visibility = "hidden"
+										document.getElementById("features-list-1").style.visibility = "hidden"
+										document.getElementById("features-list-2").style.visibility = "hidden"
+										document.getElementById("features-list-3").style.visibility = "hidden"
+										document.getElementById("features-list-4").style.visibility = "hidden"
+									}, 2000);
+								})
+							})
+						})
+					})
+					
+				},10000);
+
+  			})
+		})
+
+	</script>
+
+</body>
