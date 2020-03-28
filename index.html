@@ -28,7 +28,10 @@
 							<a href="index.html" id="a_home">Home</a>
 						</li>
 						<li>
-							<a href="chatbot.html" id="a_chatbot">Chatbot</a>
+							<a href="#" id="a_chatbot">Chatbot</a>
+						</li>
+						<li>
+							<a href="#" id="a_risk_tool">Risk Assessment</a>
 						</li>
 						<li>
 							<a href="#statsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Statistics</a>
@@ -173,6 +176,34 @@
 					return false;
 				}
 
+
+				function load_risk_tool() {
+
+					var geo_payload = ""
+
+					function getLocation() {
+  						if (navigator.geolocation) {
+    						navigator.geolocation.getCurrentPosition(sendPosition)
+  						} else {
+    						geo_payload = "lat=\"0\"&long=\"0\""
+  						}
+					}
+
+					function sendPosition(position) {
+					  geo_payload = "lat=" + position.coords.latitude + "&long=" + position.coords.longitude
+					  $("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important;\" ><iframe src=\"https://onefourthlabs.typeform.com/to/XTax06/?"+ geo_payload + "\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
+					  setTimeout(function(){
+						if (screen.width < 800) {
+							$("#sidebarCollapse").click()
+						}
+					  }, 100);
+					}
+
+					getLocation()
+
+					return false;
+				}
+
 				if (screen.width >= 800 && screen.width < 1000) {
 					$("#sidebarCollapse").click()
 				}
@@ -197,6 +228,9 @@
 
 				var a_volunteer_map = document.getElementById("a_volunteer_map");
 				a_volunteer_map.onclick = load_volunteer_map;
+
+				var a_risk_tool = document.getElementById("a_risk_tool");
+				a_risk_tool.onclick = load_risk_tool;
 
 
 			});
