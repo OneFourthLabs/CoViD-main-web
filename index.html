@@ -65,7 +65,7 @@
 									<a href="#">Government Advisory</a>
 								</li>
 								<li>
-									<a href="#">COVID Hospitals</a>
+									<a href="#" id="a_hospitals">COVID Hospitals</a>
 								</li>
 								<li>
 									<a href="#">Do's and Dont's</a>
@@ -204,9 +204,22 @@
 					return false;
 				}
 
+				function load_hospitals() {
+					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding-left:2rem !important; padding-top:2rem !important\" ><iframe src=\"https://datawrapper.dwcdn.net/XFBM8/1/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
+					setTimeout(function(){
+						if (screen.width < 800) {
+							$("#sidebarCollapse").click()
+						}
+					}, 100);
+					return false;
+				}
+
+
+
 				if (screen.width >= 800 && screen.width < 1000) {
 					$("#sidebarCollapse").click()
 				}
+
 
 				var a_home = document.getElementById("a_home");
 				a_home.onclick = load_home;
@@ -231,6 +244,9 @@
 
 				var a_risk_tool = document.getElementById("a_risk_tool");
 				a_risk_tool.onclick = load_risk_tool;
+
+				var a_hospitals = document.getElementById("a_hospitals");
+				a_hospitals.onclick = load_hospitals;
 
 
 			});
