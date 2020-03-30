@@ -201,9 +201,11 @@ function set_help_seeker_markers(display_info) {
     { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: 18 });
 }
 
-initMap();
+$( document ).ready(function() {
+  initMap();
+  // Fetch data every 10 secs
+  setInterval(get_data, 10000);
+});
 
-// Fetch data every 10 secs
-setInterval(get_data, 10000);
 
 
