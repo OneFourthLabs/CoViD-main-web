@@ -24,38 +24,38 @@ var table = new Tabulator("#volunteers_table", {
   },
 
   columns: [
-    { title: "Name", field: "name", headerFilter: "input" },
-    { title: "Email", field: "email", headerFilter: "input" },
-    { title: "Phone", field: "phone", headerFilter: "number" },
-    { title: "Help Type", field: "help_type", headerFilter: "input" },
+    { title: "Datetime", field: "datetime", headerFilter: "number" },
     { title: "Help category", field: "help_category.main", formatter: "textarea", headerFilter: "input" },
     { title: "Help Item", field: "help_category.sub", formatter: "textarea", headerFilter: "input" },
+    { title: "Phone", field: "phone", headerFilter: "number" },
     { title: "Help Message", field: "help_message", formatter: "textarea", headerFilter: "input" },
-    { title: "Datetime", field: "datetime", headerFilter: "number" },
   ],
   pagination: "local",
   paginationSize: 5,
 });
 
 function get_data() {
+
+  if(user_location==null){
+    return;
+  }
   var data = {};
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("GET", "https://db-server-dot-corona-bot-gbakse.appspot.com/get_all_volunteers", true);
+  xmlhttp.open("POST", "https://db-server-dot-corona-bot-gbakse.appspot.com/get_nearby_help_seekers", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.onreadystatechange = function () {
     var currentPage = table.getPage()
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       data = JSON.parse(xmlhttp.responseText);
-      // Avoid page refreshing on next further api calls
       table.setData(data);
       table.setPage(Math.min(currentPage, table.getPageMax()));
-      if(!executed_init_map){
-        initMap();
-        executed_init_map=true;
-      }
     }
   };
-  xmlhttp.send(null);
+  var data = JSON.stringify({ "lat": user_location["lat"], "long": user_location["lng"] });
+  // var data = JSON.stringify({ "lat": 13.086, "long": 80.2751 });
+  xmlhttp.send(data);
 }
+
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -143,6 +143,9 @@ function initMap() {
       }
     ],
   });
+  get_user_location();
+}
+function get_user_location() {
   var display_info = 'false';
 
   if (navigator.geolocation) {
@@ -165,22 +168,22 @@ function initMap() {
         radius: max_distance // in M
       });
       user_location = current_pos;
+      // Call API to get data
+      get_data();
     }, function () {
       handleLocationError(true, map.getCenter());
     });
   } else {
     // Browser doesn't support Geolocation
     handleLocationError(false, map.getCenter());
-
   }
+}
 
-  function handleLocationError(browserHasGeolocation, pos) {
-    let error_message = browserHasGeolocation ?
-      'Error: The Geolocation service failed.' :
-      'Error: Your browser doesn\'t support geolocation.';
-    window.alert(error_message);
-  }
-
+function handleLocationError(browserHasGeolocation, pos) {
+  let error_message = browserHasGeolocation ?
+    'Error: The Geolocation service failed.' :
+    'Error: Your browser doesn\'t support geolocation.';
+  window.alert(error_message);
 }
 
 function find_haversine_distance(lat1, lon1, lat2, lon2) {
@@ -246,7 +249,9 @@ function set_volunteer_markers(display_info) {
     { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: 18 });
 }
 
-get_data();
+initMap();
 
-// Fetch data every 5 secs
-setInterval(get_data, 5000);
+// Fetch data every 100 secs
+setInterval(get_data, 10000);
+
+
