@@ -1,5 +1,5 @@
 var currentPage = 1;
-var volunteers;
+var reports;
 var map;
 var user_location;
 var max_distance = 10 * 1000;
@@ -11,7 +11,7 @@ function isMobileDevice() {
   return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
 
-var table = new Tabulator("#volunteers_table", {
+var table = new Tabulator("#reports_table", {
   layout: (isMobileDevice() ? "fitDataFill" : "fitColumns"),
   //Callback on filter data
   dataFiltered: function (filters, rows) {
@@ -19,18 +19,17 @@ var table = new Tabulator("#volunteers_table", {
     for (index = 0; index < rows.length; index++) {
       newData.push(rows[index].getData());
     }
-    volunteers = newData;
-    set_volunteer_markers(volunteers);
+    reports = newData;
+    set_volunteer_markers(reports);
   },
 
   columns: [
     { title: "Start time", field: "datetime", headerFilter: "number" },
-    { title: "End time", field: "enddate", headerFilter: "number" },
-    { title: "Help category", field: "help_category.main", formatter: "textarea", headerFilter: "input" },
-    { title: "Help Item", field: "help_category.sub", formatter: "textarea", headerFilter: "input" },
+    { title: "Report category", field: "report_category.main", formatter: "textarea", headerFilter: "input" },
+    { title: "Report Item", field: "report_category.sub", formatter: "textarea", headerFilter: "input" },
     { title: "Name", field: "name", headerFilter: "input" },
     { title: "Phone", field: "phone", headerFilter: "number" },
-    { title: "Help Message", field: "help_message", formatter: "textarea", headerFilter: "input" },
+    { title: "Report Message", field: "report_message", formatter: "textarea", headerFilter: "input" },
   ],
   pagination: "local",
   paginationSize: 5,
@@ -43,8 +42,8 @@ function get_data() {
   }
   var data = {};
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("POST", "https://db-server-dot-corona-bot-gbakse.appspot.com/get_nearby_volunteers", true);
-  xmlhttp.setRequestHeader("Content-Type", "application/json");
+  xmlhttp.open("GET", "https://db-server-dot-corona-bot-gbakse.appspot.com/get_all_reports", true);
+  // xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.onreadystatechange = function () {
     var currentPage = table.getPage()
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -53,9 +52,9 @@ function get_data() {
       table.setPage(Math.min(currentPage, table.getPageMax()));
     }
   };
-  var data = JSON.stringify({ "lat": user_location["lat"], "long": user_location["lng"] });
+  // var data = JSON.stringify({ "lat": user_location["lat"], "long": user_location["lng"] });
   // var data = JSON.stringify({ "lat": 13.086, "long": 80.2751 });
-  xmlhttp.send(data);
+  xmlhttp.send(null);
 }
 
 
@@ -167,7 +166,7 @@ function set_volunteer_markers(display_info) {
   if (markerCluster) {
     markerCluster.removeMarkers(volunteer_markers);
   }
-  volunteer_markers = volunteers.map(function (entry, i) {
+  volunteer_markers = reports.map(function (entry, i) {
 
     let loc = {
       lat: parseFloat(entry['lat']),
@@ -176,13 +175,12 @@ function set_volunteer_markers(display_info) {
 
     var contentString = '' +
       '<p>' +
-      '	<h3>' + entry['help_category']['main'] + '</h3>' +
-      '	<h5>' + entry['help_category']['sub'] + '</h3>' +
+      '	<h3>' + entry['report_category']['main'] + '</h3>' +
+      '	<h5>' + entry['report_category']['sub'] + '</h3>' +
+      '	Datetime: ' + entry['datetime'] + '<br>' +
       ' Name: ' + entry['name'] + '<br>' +
-      '	Start time: ' + entry['datetime'] + '<br>' +
-      '	End time: ' + entry['enddate'] + '<br>' +
       '	Phone: ' + entry['phone'] + '<br>' +
-      '	Help Message: ' + entry['help_message'] +
+      '	report Message: ' + entry['report_message'] +
       '</p>';
 
     var infowindow = new google.maps.InfoWindow({

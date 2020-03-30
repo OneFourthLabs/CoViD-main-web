@@ -221,6 +221,21 @@
 					return false;
 				}
 
+				function load_report_map() {
+					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0.75rem !important; padding-top:3.25rem !important\" ><iframe id=\"embed\" allow=\"geolocation *\" src=\"reports.html\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; height: calc(var(--vh, 1vh)*100); overflow:hidden;\"></iframe></div>")
+					setTimeout(function(){
+						if (screen.width < 800) {
+							$("#sidebarCollapse").click()
+						}
+					}, 100);
+					let vh = window.innerHeight - 3.25*16;
+					document.getElementById("embed").style.setProperty('height', `${vh}px`)
+					window.addEventListener('resize', () => {
+						let vh = window.innerHeight - 3.25*16;
+						document.getElementById("embed").style.setProperty('height', `${vh}px`)
+					});
+					return false;
+				}
 
 				function load_risk_tool() {
 
@@ -328,6 +343,9 @@
 
 				var a_volunteer_map = document.getElementById("a_volunteer_map");
 				a_volunteer_map.onclick = load_volunteer_map;
+				
+				var a_report_map = document.getElementById("a_report_map");
+				a_report_map.onclick = load_report_map;
 
 				var a_risk_tool = document.getElementById("a_risk_tool");
 				a_risk_tool.onclick = load_risk_tool;
