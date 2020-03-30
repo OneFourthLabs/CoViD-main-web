@@ -41,7 +41,7 @@ function get_data() {
   }
   var data = {};
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("POST", "https://db-server-dot-corona-bot-gbakse.appspot.com/get_nearby_help_seekers", true);
+  xmlhttp.open("POST", "https://db-server-dot-corona-bot-gbakse.appspot.com/get_nearby_volunteers", true);
   xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.onreadystatechange = function () {
     var currentPage = table.getPage()
@@ -251,7 +251,7 @@ function set_volunteer_markers(display_info) {
 
 initMap();
 
-// Fetch data every 100 secs
+// Fetch data every 10 secs
 setInterval(get_data, 10000);
 
 

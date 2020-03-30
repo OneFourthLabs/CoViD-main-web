@@ -24,15 +24,13 @@ var table = new Tabulator("#help_seekers_table", {
   },
 
   columns: [
-    { title: "Name", field: "name", headerFilter: "input" },
-    { title: "Email", field: "email", headerFilter: "input" },
-    { title: "Phone", field: "phone", headerFilter: "number" },
-    { title: "Help Type", field: "help_type", headerFilter: "input" },
-    { title: "Help category", field: "help_category.main", formatter: "textarea", headerFilter: "input" },
-    { title: "Help Item", field: "help_category.sub", formatter: "textarea", headerFilter: "input" },
-    { title: "Help Message", field: "help_message", formatter: "textarea", headerFilter: "input" },
     { title: "Start time", field: "datetime", headerFilter: "number" },
     { title: "End time", field: "enddate", headerFilter: "number" },
+    { title: "Help category", field: "help_category.main", formatter: "textarea", headerFilter: "input" },
+    { title: "Help Item", field: "help_category.sub", formatter: "textarea", headerFilter: "input" },
+    { title: "Phone", field: "phone", headerFilter: "number" },
+    { title: "Help Message", field: "help_message", formatter: "textarea", headerFilter: "input" },
+    
   ],
   pagination: "local",
   paginationSize: 5,
@@ -41,22 +39,22 @@ var table = new Tabulator("#help_seekers_table", {
 function get_data() {
   var data = {};
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("GET", "https://db-server-dot-corona-bot-gbakse.appspot.com/get_all_help_seekers", true);
+  xmlhttp.open("POST", "https://db-server-dot-corona-bot-gbakse.appspot.com/get_nearby_help_seekers", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/json");
   xmlhttp.onreadystatechange = function () {
     var currentPage = table.getPage()
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       data = JSON.parse(xmlhttp.responseText);
-      // Avoid page refreshing on next further api calls
+      // Avoid page refresh on further API calls
       table.setData(data);
       table.setPage(Math.min(currentPage, table.getPageMax()));
-      if(!executed_init_map){
-        initMap();
-        executed_init_map=true;
       }
-    }
-  };
-  xmlhttp.send(null);
+    };
+    // var data = JSON.stringify({ "lat": 13.086, "long": 80.2751 });
+    var data = JSON.stringify({ "lat": user_location["lat"], "long": user_location["lng"] });
+    xmlhttp.send(data);
 }
+
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -144,6 +142,9 @@ function initMap() {
       }
     ],
   });
+  get_user_location();
+}
+function get_user_location() {
   var display_info = 'false';
 
   if (navigator.geolocation) {
@@ -166,22 +167,22 @@ function initMap() {
         radius: max_distance // in M
       });
       user_location = current_pos;
+      // Call API to get data
+      get_data();
     }, function () {
       handleLocationError(true, map.getCenter());
     });
   } else {
     // Browser doesn't support Geolocation
     handleLocationError(false, map.getCenter());
-
   }
+}
 
-  function handleLocationError(browserHasGeolocation, pos) {
-    let error_message = browserHasGeolocation ?
-      'Error: The Geolocation service failed.' :
-      'Error: Your browser doesn\'t support geolocation.';
-    window.alert(error_message);
-  }
-
+function handleLocationError(browserHasGeolocation, pos) {
+  let error_message = browserHasGeolocation ?
+    'Error: The Geolocation service failed.' :
+    'Error: Your browser doesn\'t support geolocation.';
+  window.alert(error_message);
 }
 
 function find_haversine_distance(lat1, lon1, lat2, lon2) {
@@ -212,8 +213,7 @@ function set_help_seeker_markers(display_info) {
       '<p>' +
       '	<h3>' + entry['help_category']['main'] + '</h3>' +
       '	<h5>' + entry['help_category']['sub'] + '</h3>' +
-      '	Start time: ' + entry['datetime'] + '<br>' +
-      '	End time: ' + entry['enddate'] + '<br>' +
+      '	Datetime: ' + entry['datetime'] + '<br>' +
       '	Name: ' + entry['name'] + '<br>' +
       '	Phone: ' + entry['phone'] + '<br>' +
       '	Email: ' + entry['email'] + '<br>' +
@@ -248,7 +248,9 @@ function set_help_seeker_markers(display_info) {
     { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: 18 });
 }
 
-get_data();
+initMap();
 
-// Fetch data every 5 secs
-setInterval(get_data, 5000);
+// Fetch data every 10 secs
+setInterval(get_data, 10000);
+
+
