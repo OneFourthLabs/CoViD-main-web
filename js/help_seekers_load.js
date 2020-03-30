@@ -28,6 +28,7 @@ var table = new Tabulator("#help_seekers_table", {
     { title: "End time", field: "enddate", headerFilter: "number" },
     { title: "Help category", field: "help_category.main", formatter: "textarea", headerFilter: "input" },
     { title: "Help Item", field: "help_category.sub", formatter: "textarea", headerFilter: "input" },
+    { title: "Name", field: "name", headerFilter: "input" },
     { title: "Phone", field: "phone", headerFilter: "number" },
     { title: "Help Message", field: "help_message", formatter: "textarea", headerFilter: "input" },
     
@@ -219,6 +220,7 @@ function set_help_seeker_markers(display_info) {
       '<p>' +
       '	<h3>' + entry['help_category']['main'] + '</h3>' +
       '	<h5>' + entry['help_category']['sub'] + '</h3>' +
+      ' Name: ' + entry['name'] + '<br>' +
       '	Start time: ' + entry['datetime'] + '<br>' +
       '	End time: ' + entry['enddate'] + '<br>' +
       '	Phone: ' + entry['phone'] + '<br>' +
