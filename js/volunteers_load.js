@@ -24,7 +24,8 @@ var table = new Tabulator("#volunteers_table", {
   },
 
   columns: [
-    { title: "Datetime", field: "datetime", headerFilter: "number" },
+    { title: "Start time", field: "datetime", headerFilter: "number" },
+    { title: "End time", field: "enddate", headerFilter: "number" },
     { title: "Help category", field: "help_category.main", formatter: "textarea", headerFilter: "input" },
     { title: "Help Item", field: "help_category.sub", formatter: "textarea", headerFilter: "input" },
     { title: "Phone", field: "phone", headerFilter: "number" },
@@ -157,17 +158,22 @@ function get_user_location() {
       map.setCenter(current_pos);
       map.setZoom(12)
 
-      var access_area = new google.maps.Circle({
-        strokeColor: '#FF0000',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#FF0000',
-        fillOpacity: 0.35,
-        map: map,
-        center: current_pos,
-        radius: max_distance // in M
-      });
+      // var access_area = new google.maps.Circle({
+      //   strokeColor: '#FF0000',
+      //   strokeOpacity: 0.8,
+      //   strokeWeight: 2,
+      //   fillColor: '#FF0000',
+      //   fillOpacity: 0.35,
+      //   map: map,
+      //   center: current_pos,
+      //   radius: max_distance // in M
+      // });
       user_location = current_pos;
+      var marker = new google.maps.Marker({
+        position: current_pos,
+        map: map,
+        title: 'Your Location!'
+      });
       // Call API to get data
       get_data();
     }, function () {
@@ -186,6 +192,7 @@ function handleLocationError(browserHasGeolocation, pos) {
   window.alert(error_message);
 }
 
+// Not used for now
 function find_haversine_distance(lat1, lon1, lat2, lon2) {
   var R = 6371; // km (change this constant to get miles)
   var dLat = (lat2 - lat1) * Math.PI / 180;
@@ -214,10 +221,9 @@ function set_volunteer_markers(display_info) {
       '<p>' +
       '	<h3>' + entry['help_category']['main'] + '</h3>' +
       '	<h5>' + entry['help_category']['sub'] + '</h3>' +
-      '	Datetime: ' + entry['datetime'] + '<br>' +
-      '	Name: ' + entry['name'] + '<br>' +
+      '	Start time: ' + entry['datetime'] + '<br>' +
+      '	End time: ' + entry['enddate'] + '<br>' +
       '	Phone: ' + entry['phone'] + '<br>' +
-      '	Email: ' + entry['email'] + '<br>' +
       '	Help Message: ' + entry['help_message'] +
       '</p>';
 
@@ -232,14 +238,9 @@ function set_volunteer_markers(display_info) {
       icon: icon_url
     });
 
-    if (display_info && user_location) {
-      let haversine_distance = find_haversine_distance(user_location.lat, user_location.lng, loc.lat, loc.lng)
-      if (haversine_distance <= max_distance) {
-        marker.addListener('click', function () {
-          infowindow.open(map, marker);
-        });
-      }
-    }
+    marker.addListener('click', function () {
+      infowindow.open(map, marker);
+    });
 
     return marker
   });
