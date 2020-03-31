@@ -136,7 +136,7 @@ function get_user_location() {
 
 function handleLocationError(browserHasGeolocation, pos) {
   let error_message = browserHasGeolocation ?
-    'Error: The Geolocation service failed.' :
+    'You have blocked geolocation access for this website. Please enable it to see the details.' :
     'Error: Your browser doesn\'t support geolocation.';
   window.alert(error_message);
 }
