@@ -6,34 +6,38 @@ var max_distance = 10 * 1000;
 var markerCluster;
 var volunteer_markers;
 var executed_init_map = false;
+var table;
+
 //Refer: https://coderwall.com/p/i817wa/one-line-function-to-detect-mobile-devices-with-javascript
 function isMobileDevice() {
   return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-};
+}
 
-var table = new Tabulator("#reports_table", {
-  layout: (isMobileDevice() ? "fitDataFill" : "fitColumns"),
-  //Callback on filter data
-  dataFiltered: function (filters, rows) {
-    var newData = []
-    for (index = 0; index < rows.length; index++) {
-      newData.push(rows[index].getData());
-    }
-    reports = newData;
-    set_volunteer_markers(reports);
-  },
+function loadTable() {
+  table = new Tabulator("#reports_table", {
+    layout: (isMobileDevice() ? "fitDataFill" : "fitColumns"),
+    //Callback on filter data
+    dataFiltered: function (filters, rows) {
+      var newData = []
+      for (index = 0; index < rows.length; index++) {
+        newData.push(rows[index].getData());
+      }
+      reports = newData;
+      set_volunteer_markers(reports);
+    },
 
-  columns: [
-    { title: "Start time", field: "datetime", headerFilter: "number" },
-    { title: "Report category", field: "report_category.main", formatter: "textarea", headerFilter: "input" },
-    { title: "Report Item", field: "report_category.sub", formatter: "textarea", headerFilter: "input" },
-    { title: "Name", field: "name", headerFilter: "input" },
-    { title: "Phone", field: "phone", headerFilter: "number" },
-    { title: "Report Message", field: "report_message", formatter: "textarea", headerFilter: "input" },
-  ],
-  pagination: "local",
-  paginationSize: 5,
-});
+    columns: [
+      { title: "Start time", field: "datetime", headerFilter: "number" },
+      { title: "Report category", field: "report_category.main", formatter: "textarea", headerFilter: "input" },
+      { title: "Report Item", field: "report_category.sub", formatter: "textarea", headerFilter: "input" },
+      { title: "Name", field: "name", headerFilter: "input" },
+      { title: "Phone", field: "phone", headerFilter: "number" },
+      { title: "Report Message", field: "report_message", formatter: "textarea", headerFilter: "input" },
+    ],
+    pagination: "local",
+    paginationSize: 5,
+  });
+}
 
 function get_data() {
 
@@ -206,11 +210,17 @@ function set_volunteer_markers(display_info) {
     { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: 18 });
 }
 
-$( document ).ready(function() {
+// $( document ).ready(function() {
+//   initMap();
+//   // Fetch data every 10 secs
+//   setInterval(get_data, 10000);
+// });
+
+$( window ).load(function() {
+  // console.log(window);
+  loadTable();
   initMap();
+
   // Fetch data every 10 secs
   setInterval(get_data, 10000);
 });
-
-
-
