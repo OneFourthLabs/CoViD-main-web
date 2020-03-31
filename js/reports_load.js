@@ -223,4 +223,8 @@ $( window ).load(function() {
 
   // Fetch data every 10 secs
   setInterval(get_data, 10000);
+
+  setTimeout(function() {
+    $("#cover-spin").hide();
+  }, 1500);
 });

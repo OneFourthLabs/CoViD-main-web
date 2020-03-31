@@ -222,5 +222,5 @@ $( window ).load(function() {
 
   setTimeout(function() {
     $("#cover-spin").hide();
-  }, 2000);
+  }, 1500);
 });
