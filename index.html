@@ -34,22 +34,22 @@
 							<a href="index.html" id="a_home">Home</a>
 						</li>
 						<li>
-							<a href="#" id="a_chatbot">Chatbot</a>
+							<a href="chatbot.html" id="a_chatbot">Chatbot</a>
 						</li>
 						<li>
-							<a href="#" id="a_risk_tool">Risk Assessment</a>
+							<a href="risk_assessment.html" id="a_risk_tool">Risk Assessment</a>
 						</li>
 						<li>
 							<a href="#statsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Statistics</a>
 							<ul class="collapse list-unstyled" id="statsSubmenu">
 								<li>
-									<a href="#" id="a_patient_tracker">Patient Tracker</a>
+									<a href="patient_tracker.html" id="a_patient_tracker">Patient Tracker</a>
 								</li>
 								<li>
-									<a href="#" id="a_state_wise_stats">State-wise Statistics</a>
+									<a href="states_statistics.html" id="a_state_wise_stats">State-wise Statistics</a>
 								</li>
 								<li>
-									<a href="#" id="a_state_wise_map">State-wise Maps</a>
+									<a href="states_maps.html" id="a_state_wise_map">State-wise Maps</a>
 								</li>
 							</ul>
 						</li>
@@ -57,13 +57,13 @@
 							<a href="#helpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">SOS/Volunteer/Reports</a>
 							<ul class="collapse list-unstyled" id="helpSubmenu">
 								<li>
-									<a href="#" id="a_sos_map">SOS Map</a>
+									<a href="sos.html" id="a_sos_map">SOS Map</a>
 								</li>
 								<li>
-									<a href="#" id="a_volunteer_map">Volunteer Map</a>
+									<a href="volunteers.html" id="a_volunteer_map">Volunteer Map</a>
 								</li>
 								<li>
-									<a href="#" id="a_report_map">Report Map</a>
+									<a href="reports.html" id="a_report_map">Report Map</a>
 								</li>
 							</ul>
 						</li>
@@ -71,13 +71,13 @@
 							<a href="#infoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Info</a>
 							<ul class="collapse list-unstyled" id="infoSubmenu">
 								<li>
-									<a href="#" id="a_advisory">Government Advisory</a>
+									<a href="govt_advisory.html" id="a_advisory">Government Advisory</a>
 								</li>
 								<li>
-									<a href="#" id="a_hospitals">COVID Hospitals</a>
+									<a href="covid_hospitals.html" id="a_hospitals">COVID Hospitals</a>
 								</li>
 								<li>
-									<a href="#" id="a_dos">Do's and Dont's</a>
+									<a href="dos_donts.html" id="a_dos">Do's and Dont's</a>
 								</li>
 							</ul>
 						</li>
@@ -133,252 +133,13 @@
 					return false;
 				}
 
-				function load_chatbot() {
-					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important\" ><iframe id=\"embed\" allow=\"geolocation *;microphone *\" src=\"https://corona-bot.onefourthlabs.com/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; height: calc(var(--vh, 1vh)*100); overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-					setTimeout(function(){
-						window.scrollTo(500, 0);
-						if (screen.width < 800) {
-							$("#sidebarCollapse").click()
-						}
-					}, 100);
-					let vh = window.innerHeight;
-					document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					window.addEventListener('resize', () => {
-						let vh = window.innerHeight;
-						document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					});
-					return false;
-				}
-
-				function load_patient_tracker() {
-					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0.75rem !important; padding-top:3.25rem !important\" ><iframe id=\"embed\" src=\"https://datawrapper.dwcdn.net/yJfWb/12/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; height: calc(var(--vh, 1vh)*100); overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-					setTimeout(function(){
-						window.scrollTo(500, 0);
-						if (screen.width < 800) {
-							$("#sidebarCollapse").click()
-						}
-					}, 100);
-					let vh = window.innerHeight - 3.25*16;
-					document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					window.addEventListener('resize', () => {
-						let vh = window.innerHeight - 3.25*16;
-						document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					});
-					return false;
-				}
-
-				function load_state_wise_stats() {
-					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0.75rem !important; padding-top:3.25rem !important\" ><iframe id=\"embed\" src=\"https://datawrapper.dwcdn.net/Wyph4/6/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; height: calc(var(--vh, 1vh)*100); overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-					setTimeout(function(){
-						window.scrollTo(500, 0);
-						if (screen.width < 800) {
-							$("#sidebarCollapse").click()
-						}
-					}, 100);
-					let vh = window.innerHeight - 3.25*16;
-					document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					window.addEventListener('resize', () => {
-						let vh = window.innerHeight - 3.25*16;
-						document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					});
-					return false;
-				}
-
-				function load_state_wise_map() {
-					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0.75rem !important; padding-top:3.25rem !important\" ><iframe id=\"embed\" src=\"https://datawrapper.dwcdn.net/FMHmt/5/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; height: calc(var(--vh, 1vh)*100); overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-					setTimeout(function(){
-						window.scrollTo(500, 0);
-						if (screen.width < 800) {
-							$("#sidebarCollapse").click()
-						}
-					}, 100);
-					let vh = window.innerHeight - 3.25*16;
-					document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					window.addEventListener('resize', () => {
-						let vh = window.innerHeight - 3.25*16;
-						document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					});
-					return false;
-				}
-
-				function load_sos_map() {
-					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0.75rem !important; padding-top:3.25rem !important\" ><iframe id=\"embed\" allow=\"geolocation *\" src=\"help_seekers.html\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; height: calc(var(--vh, 1vh)*100); overflow:hidden;\"></iframe></div>")
-					setTimeout(function(){
-						window.scrollTo(500, 0);
-						if (screen.width < 800) {
-							$("#sidebarCollapse").click()
-						}
-					}, 100);
-					let vh = window.innerHeight - 3.25*16;
-					document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					window.addEventListener('resize', () => {
-						let vh = window.innerHeight - 3.25*16;
-						document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					});
-					return false;
-				}
-
-				function load_volunteer_map() {
-					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0.75rem !important; padding-top:3.25rem !important\" ><iframe id=\"embed\" allow=\"geolocation *\" src=\"volunteers.html\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; height: calc(var(--vh, 1vh)*100); padding:0; overflow:hidden;\"></iframe></div>")
-					setTimeout(function(){
-						window.scrollTo(500, 0);
-						if (screen.width < 800) {
-							$("#sidebarCollapse").click()
-						}
-					}, 100);
-					let vh = window.innerHeight - 3.25*16;
-					document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					window.addEventListener('resize', () => {
-						let vh = window.innerHeight - 3.25*16;
-						document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					});
-					return false;
-				}
-
-				function load_report_map() {
-					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0.75rem !important; padding-top:3.25rem !important\" ><iframe id=\"embed\" allow=\"geolocation *\" src=\"reports.html\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; height: calc(var(--vh, 1vh)*100); overflow:hidden;\"></iframe></div>")
-					setTimeout(function(){
-						window.scrollTo(500, 0);
-						if (screen.width < 800) {
-							$("#sidebarCollapse").click()
-						}
-					}, 100);
-					let vh = window.innerHeight - 3.25*16;
-					document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					window.addEventListener('resize', () => {
-						let vh = window.innerHeight - 3.25*16;
-						document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					});
-					return false;
-				}
-
-				function load_risk_tool() {
-
-					var geo_payload = ""
-
-					function getLocation() {
-  						if (navigator.geolocation) {
-    						navigator.geolocation.getCurrentPosition(sendPosition)
-  						} else {
-    						geo_payload = "lat=\"0\"&long=\"0\""
-  						}
-					}
-
-					function sendPosition(position) {
-					  geo_payload = "lat=" + position.coords.latitude + "&long=" + position.coords.longitude
-					  $("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important;\" ><iframe id=\"embed\" src=\"https://onefourthlabs.typeform.com/to/XTax06/?"+ geo_payload + "\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; height: calc(var(--vh, 1vh)*100); overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-					  setTimeout(function(){
-						window.scrollTo(500, 0);
-						if (screen.width < 800) {
-							$("#sidebarCollapse").click()
-						}
-					  }, 100);
-					}
-
-					getLocation()
-					let vh = window.innerHeight;
-					document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					window.addEventListener('resize', () => {
-						let vh = window.innerHeight;
-						document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					});
-					return false;
-				}
-
-				function load_hospitals() {
-					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\" padding:0.75rem !important; padding-top:3.25rem !important\" ><iframe id=\"embed\" src=\"https://datawrapper.dwcdn.net/XFBM8/1/\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; height: calc(var(--vh, 1vh)*100); overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-					setTimeout(function(){
-						window.scrollTo(500, 0);
-						if (screen.width < 800) {
-							$("#sidebarCollapse").click()
-						}
-					}, 100);
-					let vh = window.innerHeight - 3.25*16;
-					document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					window.addEventListener('resize', () => {
-						let vh = window.innerHeight - 3.25*16;
-						document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					});
-					return false;
-				}
-
-				function load_advisory() {
-					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important;\" ><iframe id=\"embed\" src=\"advisory.html\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; height: calc(var(--vh, 1vh)*100); overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-					setTimeout(function(){
-						window.scrollTo(500, 0);
-						if (screen.width < 800) {
-							$("#sidebarCollapse").click()
-						}
-					}, 100);
-					let vh = window.innerHeight;
-					document.getElementById("embed").style.setProperty('height', `${vh}px !important`)
-					window.addEventListener('resize', () => {
-						let vh = window.innerHeight;
-						document.getElementById("embed").style.setProperty('height', `${vh}px !important`)
-					});
-					return false;
-				}
-
-				function load_dos() {
-					$("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important;\" ><iframe id=\"embed\" src=\"dos_donts.html\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; height: calc(var(--vh, 1vh)*100); overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
-					setTimeout(function(){
-						window.scrollTo(500, 0);
-						if (screen.width < 800) {
-							$("#sidebarCollapse").click()
-						}
-					}, 100);
-					let vh = window.innerHeight;
-					document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					window.addEventListener('resize', () => {
-						let vh = window.innerHeight;
-						document.getElementById("embed").style.setProperty('height', `${vh}px`)
-					});
-					return false;
-				}
-
-
 				if (screen.width >= 800 && screen.width < 1000) {
 					$("#sidebarCollapse").click()
 				}
 
-
 				var a_home = document.getElementById("a_home");
 				a_home.onclick = load_home;
-
-				var a_chatbot = document.getElementById("a_chatbot");
-				a_chatbot.onclick = load_chatbot;
-
-				var a_patient_tracker = document.getElementById("a_patient_tracker");
-				a_patient_tracker.onclick = load_patient_tracker;
-
-				var a_state_wise_stats = document.getElementById("a_state_wise_stats");
-				a_state_wise_stats.onclick = load_state_wise_stats;
-
-				var a_state_wise_map = document.getElementById("a_state_wise_map");
-				a_state_wise_map.onclick = load_state_wise_map;
-
-				var a_sos_map = document.getElementById("a_sos_map");
-				a_sos_map.onclick = load_sos_map;
-
-				var a_volunteer_map = document.getElementById("a_volunteer_map");
-				a_volunteer_map.onclick = load_volunteer_map;
 				
-				var a_report_map = document.getElementById("a_report_map");
-				a_report_map.onclick = load_report_map;
-
-				var a_risk_tool = document.getElementById("a_risk_tool");
-				a_risk_tool.onclick = load_risk_tool;
-
-				var a_hospitals = document.getElementById("a_hospitals");
-				a_hospitals.onclick = load_hospitals;
-
-				var a_advisory = document.getElementById("a_advisory");
-				a_advisory.onclick = load_advisory;
-
-				var a_dos = document.getElementById("a_dos");
-				a_dos.onclick = load_dos;
-
-
 			});
 
 		</script>

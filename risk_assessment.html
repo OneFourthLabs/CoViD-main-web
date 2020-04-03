@@ -8,8 +8,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="../css/government_updates.css">
-
+	
 	<!--    Open Graph Protocol (OGP) Tags    -->
 	<meta property='og:title' content='AI4Bharat COVID19 App'/>
 	<meta property='og:image' content='https://covid19.ai4bharat.org/img/open_graph/og_img.png'/>
@@ -102,8 +101,6 @@
 
 			<!-- Page Content  -->
 			<div id="content" class="p-4 p-md-5 pt-5" style="padding:0rem !important" >
-				<iframe src="dos_donts_contents.html" style="margin:0; padding:0rem; width:inherit; height:100vh; overflow:auto; border:none; margin:0; padding:0; overflow:hidden;">
-				</iframe>
 			</div>
 		</div>
 
@@ -115,11 +112,45 @@
 
 		<script>
 
-			$(function(){
+			$( document ).ready(function() {
 				// $("#nav_sidebar").load("nav.html");
 				if (screen.width >= 800 && screen.width < 1000) {
 					$("#sidebarCollapse").click()
 				}
+
+                function load_risk_tool() {
+
+					var geo_payload = ""
+
+					function getLocation() {
+  						if (navigator.geolocation) {
+    						navigator.geolocation.getCurrentPosition(sendPosition)
+  						} else {
+    						geo_payload = "lat=\"0\"&long=\"0\""
+  						}
+					}
+
+					function sendPosition(position) {
+					  geo_payload = "lat=" + position.coords.latitude + "&long=" + position.coords.longitude
+					  $("#content").replaceWith("<div id=\"content\" class=\"p-4 p-md-5 pt-5\" style=\"padding:0rem !important;\" ><iframe id=\"embed\" src=\"https://onefourthlabs.typeform.com/to/XTax06/?"+ geo_payload + "\" style=\"margin:0; padding:0rem; width:inherit; height:100vh; height: calc(var(--vh, 1vh)*100); overflow:auto; border:none; margin:0; padding:0; overflow:hidden;\"></iframe></div>")
+					  setTimeout(function(){
+						window.scrollTo(500, 0);
+						if (screen.width < 800) {
+							$("#sidebarCollapse").click()
+						}
+					  }, 100);
+					}
+
+					getLocation()
+					let vh = window.innerHeight;
+					document.getElementById("embed").style.setProperty('height', `${vh}px`)
+					window.addEventListener('resize', () => {
+						let vh = window.innerHeight;
+						document.getElementById("embed").style.setProperty('height', `${vh}px`)
+					});
+					return false;
+				}
+                load_risk_tool();
 			});
 
 		</script>
