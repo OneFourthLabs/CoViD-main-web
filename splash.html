@@ -12,7 +12,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<style type="text/css">
 
 		body{
@@ -136,7 +136,7 @@
 		.app-title {
 			padding: .3em 1em .25em;    
 			font-weight: 300;
-			/*font-size: 32px;*/
+			font-size: 5.5rem;
 			color: white;
 			font-family: 'Rubik', serif;
 			position:relative;
@@ -177,7 +177,17 @@
 			50% { opacity: 0.7; }
 		}
 
+		.click-cls{
+			color: #ffffff;
+			margin-bottom: -2rem;
+			font-family: 'Rubik', serif;
+			font-weight: 300;
+			font-size: 3rem;
+		}
 
+		.click-cls:hover{
+			color: black;
+		}
 		/*/**/*/
 
 	</style>
@@ -188,30 +198,30 @@
 <body>
 
 	<main role="main" class="main-content" id="main-content">
-		<div class="titleCont">
-			
+		<div class="titleCont" style="z-index: 1 !important;">
 
+			
 			<h1 class="app-title" id="app-title">
-				AI4Bharat<br/><span style="font-size: 50%; letter-spacing:5px; font-weight:500; color:rgba(255, 255, 255, 0.8)">COVID19 APP</span>
+				AI4Bharat<br/><span style="font-size: 50%; letter-spacing:5px; font-weight:500; color:rgba(255, 255, 255, 0.8);">COVID19 APP</span>
 			</h1>
 
 			<h3 class="features" id="features">
 				<br/>In the app you can
 			</h3>
 			<h3 class="features-list features-list-1" id="features-list-1">
-				chat with our bot
+				<a target="_parent" class="btn btn-lg btn-block click-cls" href="chatbot.html" role="button">chat with our bot</a>
 			</h3>
 			<h3 class="features-list features-list-2" id="features-list-2">
-				perform risk assessment
+				<a target="_parent" class="btn btn-lg btn-block click-cls" href="risk_assessment.html" role="button">perform risk assessment</a>
 			</h3>
 			<h3 class="features-list features-list-3" id="features-list-3">
-				visualise live data 
+				<a target="_parent" class="btn btn-lg btn-block click-cls" href="patient_tracker.html" role="button">visualise live data </a>
 			</h3>
 			<h3 class="features-list features-list-4" id="features-list-4">
-				seek and offer help
+				<a target="_parent" class="btn btn-lg btn-block click-cls" href="sos.html" role="button">seek and offer help</a>
 			</h3>
 			<h3 class="features-list features-list-5" id="features-list-5">
-				follow govt. updates
+				<a target="_parent" class="btn btn-lg btn-block click-cls" href="govt_advisory.html" role="button">follow govt. updates</a>
 			</h3>
 
 			<h2 class="verse" id="verse">
